@@ -4,6 +4,9 @@ from django.conf.urls.static import static
 from .views import DocenteList, DocenteCreate, DocenteUpdate , DocenteDelete
 from django.urls import path, include
 
+from rest_framework.urlpatterns import format_suffix_patterns
+from Docente import views
+
 
 urlpatterns = [
     path('listar/', DocenteList.as_view(), name="docentes_list"),
@@ -13,3 +16,12 @@ urlpatterns = [
     path('borrar/<int:pk>', DocenteDelete.as_view(), name="docentes_borrar"),
     
 ]
+
+
+ 
+urlpatterns = [
+    path('api/', views.API_objects.as_view()),
+    path('api/<int:pk>/', views.API_objects_details.as_view()),
+]
+ 
+urlpatterns = format_suffix_patterns(urlpatterns)

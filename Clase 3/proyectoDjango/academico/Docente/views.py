@@ -7,7 +7,24 @@ from django.urls import reverse_lazy
 from .models import Docente
 from .forms import DocenteForm
 # Create your views here.
+ 
+from rest_framework import generics
+from .serializers import DocenteSerializer
+# las importaciones para la API 
 
+#----------Vista API REST------------------
+class API_objects(generics.ListCreateAPIView):
+    #--SELECT * FROM DOCENTE--
+    queryset = Docente.objects.all()
+    serializer_class = DocenteSerializer
+    
+class API_objects_details(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Docente.objects.all()
+    serializer_class = DocenteSerializer
+
+
+
+#-----------Clases genericas-------------------
 class DocenteList (ListView):                    
     model = Docente
     template_name = 'Docente/docente_list.html'
